@@ -1,0 +1,204 @@
+{
+"trlist": [
+  {
+   "Substation": "B2",
+   "Switchgear_Feeder": "HVS-B2-2001A",
+   "Transformer_No": "TR-B2-1001",
+   "TR_Rating": 70000,
+   "Voltage": "115\/11",
+   "kW": 25238.79,
+   "kVAR": 13607.83,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B2",
+   "Switchgear_Feeder": "HVS-B2-2001B",
+   "Transformer_No": "TR-B2-1002",
+   "TR_Rating": 70000,
+   "Voltage": "115\/11",
+   "kW": 21081.66,
+   "kVAR": 10543.51,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B2",
+   "Switchgear_Feeder": "HVS-B2-3001A",
+   "Transformer_No": "TR-B2-2001",
+   "TR_Rating": 16000,
+   "Voltage": "11\/6.3",
+   "kW": 5401.72,
+   "kVAR": 2777.53,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B2",
+   "Switchgear_Feeder": "HVS-B2-3001B",
+   "Transformer_No": "TR-B2-2002",
+   "TR_Rating": 16000,
+   "Voltage": "11\/6.3",
+   "kW": 4889.66,
+   "kVAR": 2827.58,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B2",
+   "Switchgear_Feeder": "LVS-B2-4001A",
+   "Transformer_No": "TR-B2-2003",
+   "TR_Rating": 2500,
+   "Voltage": "11\/0.4",
+   "kW": 1499.04,
+   "kVAR": 881.22,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B2",
+   "Switchgear_Feeder": "LVS-B2-4001B",
+   "Transformer_No": "TR-B2-2004",
+   "TR_Rating": 2500,
+   "Voltage": "11\/0.4",
+   "kW": 100.21,
+   "kVAR": 60.95,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B2",
+   "Switchgear_Feeder": "LVS-B2-4002A",
+   "Transformer_No": "TR-B2-2005",
+   "TR_Rating": 2500,
+   "Voltage": "11\/0.4",
+   "kW": 950.63,
+   "kVAR": 756.16,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B2",
+   "Switchgear_Feeder": "LVS-B2-4002B",
+   "Transformer_No": "TR-B2-2006",
+   "TR_Rating": 2500,
+   "Voltage": "11\/0.4",
+   "kW": 494.29,
+   "kVAR": 337.61,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B2",
+   "Switchgear_Feeder": "LVS-B2-4003A",
+   "Transformer_No": "TR-B2-2007",
+   "TR_Rating": 2500,
+   "Voltage": "11\/0.4",
+   "kW": 667.72,
+   "kVAR": 387.15,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B2",
+   "Switchgear_Feeder": "LVS-B2-4003B",
+   "Transformer_No": "TR-B2-2008",
+   "TR_Rating": 2500,
+   "Voltage": "11\/0.4",
+   "kW": 812.64,
+   "kVAR": 567.19,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B7",
+   "Switchgear_Feeder": "LVS-B7-4001A",
+   "Transformer_No": "TR-B7-2001",
+   "TR_Rating": 2500,
+   "Voltage": "11\/0.4",
+   "kW": 702.36,
+   "kVAR": 414.52,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B7",
+   "Switchgear_Feeder": "LVS-B7-4001B",
+   "Transformer_No": "TR-B7-2002",
+   "TR_Rating": 2500,
+   "Voltage": "11\/0.4",
+   "kW": 808.28,
+   "kVAR": 445.18,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B7",
+   "Switchgear_Feeder": "LVS-B7-4002A",
+   "Transformer_No": "TR-B7-2003",
+   "TR_Rating": 2500,
+   "Voltage": "11\/0.4",
+   "kW": 1101.82,
+   "kVAR": 621.31,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B7",
+   "Switchgear_Feeder": "LVS-B7-4002B",
+   "Transformer_No": "TR-B7-2004",
+   "TR_Rating": 2500,
+   "Voltage": "11\/0.4",
+   "kW": 166.09,
+   "kVAR": 114.19,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B7",
+   "Switchgear_Feeder": "LVS-B7-4003A",
+   "Transformer_No": "TR-B7-2005",
+   "TR_Rating": 2000,
+   "Voltage": "11\/0.4",
+   "kW": 319.08,
+   "kVAR": 179.29,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B7",
+   "Switchgear_Feeder": "LVS-B7-4003B",
+   "Transformer_No": "TR-B7-2006",
+   "TR_Rating": 2000,
+   "Voltage": "11\/0.4",
+   "kW": 42.66,
+   "kVAR": 23.97,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B8",
+   "Switchgear_Feeder": "LVS-B8-4001A",
+   "Transformer_No": "TR-B8-2001",
+   "TR_Rating": 4000,
+   "Voltage": "11\/0.4",
+   "kW": 2069.96,
+   "kVAR": 197.13,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B8",
+   "Switchgear_Feeder": "LVS-B8-4001B",
+   "Transformer_No": "TR-B8-2002",
+   "TR_Rating": 4000,
+   "Voltage": "11\/0.4",
+   "kW": 1015.58,
+   "kVAR": 119.29,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B8",
+   "Switchgear_Feeder": "LVS-B8-4002A",
+   "Transformer_No": "TR-B8-2003",
+   "TR_Rating": 2500,
+   "Voltage": "11\/0.4",
+   "kW": 946.01,
+   "kVAR": 629.15,
+   "PM_Result": "Normal"
+  },
+  {
+   "Substation": "B8",
+   "Switchgear_Feeder": "LVS-B8-4002B",
+   "Transformer_No": "TR-B8-2004",
+   "TR_Rating": 2500,
+   "Voltage": "11\/0.4",
+   "kW": 847.4,
+   "kVAR": 123.84,
+   "PM_Result": "Normal"
+  }
+ ]
+}

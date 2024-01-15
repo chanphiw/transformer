@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <title>Transformer List</title>
+   <meta name="description" content="Transformer" />
+   <style></style>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+   <script src="https://morgul.github.io/ui-bootstrap4/ui-bootstrap-tpls-3.0.6.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+   <script>
+      angular
+         .module("app", ["ui.bootstrap"])
+         .controller("uhv", function ($scope, $http) {
+            $http.get("trlist.json").then(
+               function successCallback(response) {
+                  $scope.codes = response.data;
+                  console.log("trlist : ");
+                  console.log(response.data);
+               },
+               function errorCallback(response) {
+                  console.log("Unable to perform get request");
+               }
+            );
+         })
+         .filter("myfilter", function () {
+            return function (x) {
+               var i,
+                  c,
+                  txt = "";
+               for (i = 0; i < x.length; i++) {
+                  c = x[i];
+
+                  c = c.toUpperCase();
+
+                  txt += c;
+               }
+               return txt;
+            };
+         });
+         
+   </script>
+</head>
+
+<body class="container">
+   <p id="demo"></p>
+   <script>
+      const d = new Date();
+      document.getElementById("demo").innerHTML = d;
+   </script>
+   <div ng-app="app" ng-controller="uhv">
+      <h3 class="text-center text-white" style="background-color: rgb(215, 9, 242)">
+         ข้อมูลหม้อแปลงไฟฟ้า ของ RDCC Plant
+      </h3>
+      <div class="row">
+         <div class="col-lg-12">
+            <table class="table table-hover">
+               <thead>
+                  <tr style="background-color: rgb(16, 233, 182)">
+                     <th scope="col"></th>
+                     <th scope="col">Substation</th>
+                     <th scope="col">Switchgear_Feeder</th>
+                     <th scope="col">Transformer_No</th>
+                     <th scope="col">TR_Rating(kVA)</th>
+                     <th scope="col">Voltage(kV)</th>
+                     <th scope="col">Power(kW)</th>
+                     <th scope="col">Reactive(kVAR)</th>
+                     <th scope="col" class="text-danger text-center">PM_Result</th>
+                  </tr>
+               </thead>
+               <tbody class="text-center">
+                  <tr style="background-color: rgb(212, 220, 220)">
+                     <th scope="col"></th>
+                     <th scope="col">
+                        <input ng-model="s.Substation" placeholder="ค้นหา Sub" class="form-control input-md" />
+                     </th>
+                     <th scope="col">
+                        <input ng-model="s.Switchgear_Feeder" placeholder="SWGR No." class="form-control input-md" />
+                     </th>
+                     <th scope="col">
+                        <input ng-model="s.Transformer_No" placeholder="TR_No" class="form-control input-md" />
+                     </th>
+                     <th scope="col">
+                        <input ng-model="s.TR_Rating" placeholder="TR_Rating" class="form-control input-md" />
+                     </th>
+                     <th scope="col">
+                        <input ng-model="s.Voltage" placeholder="Voltage" class="form-control input-md" />
+                     </th>
+                     <th scope="col">
+                        <input ng-model="s.Power_kW" placeholder="Power_kW" class="form-control input-md" />
+                     </th>
+                     <th scope="col">
+                        <input ng-model="s.kVAR" placeholder="kVAR" class="form-control input-md" />
+                     </th>
+                     
+                     <th scope="col">
+                        <input ng-model="s.PM_Result" placeholder="รายงาน" class="form-control input-md" />
+                     </th>
+                  </tr>
+                  <tr class="font-weight-bolder" ng-repeat=" r in  codes.trlist | filter:s | limitTo: 20">
+                     <td>{{ $index+1}}</td>
+                     <td>{{ r.Substation}}</td>
+                     <td>{{ r.Switchgear_Feeder}}</td>
+                     <td>{{ r.Transformer_No}}</td>
+                     <td>{{ r.TR_Rating}}</td>
+                     <td>{{ r.Voltage}}</td>
+                     <td>{{ r.kW}}</td>
+                     <td>{{ r.kVAR}}</td>
+                     <td>{{ r.PM_Result}}</td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</body>
+
+</html>
