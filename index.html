@@ -2,11 +2,192 @@
 <html lang="en">
 
 <head>
-   <title>Transformer List</title>
-   <meta name="description" content="Transformer" />
-   <style></style>
+   <title>Transformer Management System</title>
+   <meta name="description" content="Transformer Management System - RDCC Plant" />
+   <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   <style>
+      body {
+         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+         min-height: 100vh;
+      }
+
+      .main-container {
+         background: rgba(255, 255, 255, 0.95);
+         border-radius: 15px;
+         margin: 20px auto;
+         padding: 30px;
+         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+         max-width: 95%;
+      }
+
+      .header-title {
+         background: linear-gradient(45deg, #667eea, #764ba2);
+         color: white;
+         padding: 20px;
+         border-radius: 10px;
+         text-align: center;
+         margin-bottom: 30px;
+         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-title h2 {
+         margin: 0;
+         font-weight: 600;
+         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .search-container {
+         background: #f8f9fa;
+         border-radius: 10px;
+         padding: 20px;
+         margin-bottom: 20px;
+         border: 1px solid #e9ecef;
+      }
+
+      .search-row {
+         margin-bottom: 15px;
+      }
+
+      .search-input {
+         border-radius: 8px;
+         border: 1px solid #ced4da;
+         padding: 10px 15px;
+         transition: all 0.3s ease;
+      }
+
+      .search-input:focus {
+         border-color: #667eea;
+         box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+      }
+
+      .table-container {
+         background: white;
+         border-radius: 10px;
+         overflow: hidden;
+         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .table {
+         margin-bottom: 0;
+      }
+
+      .table thead th {
+         background: linear-gradient(45deg, #28a745, #20c997);
+         color: white;
+         border: none;
+         padding: 15px 10px;
+         font-weight: 600;
+         text-align: center;
+         position: sticky;
+         top: 0;
+         z-index: 10;
+      }
+
+      .table tbody tr {
+         transition: all 0.3s ease;
+      }
+
+      .table tbody tr:hover {
+         background-color: #f8f9fa;
+         transform: scale(1.01);
+      }
+
+      .table td {
+         padding: 12px 8px;
+         vertical-align: middle;
+         border-bottom: 1px solid #dee2e6;
+      }
+
+      .status-badge {
+         padding: 6px 12px;
+         border-radius: 20px;
+         font-size: 0.8em;
+         font-weight: bold;
+         text-transform: uppercase;
+      }
+
+      .status-normal {
+         background: #d4edda;
+         color: #155724;
+         border: 1px solid #c3e6cb;
+      }
+
+      .status-warning {
+         background: #fff3cd;
+         color: #856404;
+         border: 1px solid #ffeaa7;
+      }
+
+      .status-danger {
+         background: #f8d7da;
+         color: #721c24;
+         border: 1px solid #f5c6cb;
+      }
+
+      .current-time {
+         background: linear-gradient(45deg, #17a2b8, #6f42c1);
+         color: white;
+         padding: 10px 20px;
+         border-radius: 25px;
+         display: inline-block;
+         margin-bottom: 20px;
+         font-weight: 500;
+      }
+
+      .stats-row {
+         margin: 20px 0;
+      }
+
+      .stat-card {
+         background: white;
+         border-radius: 10px;
+         padding: 20px;
+         text-align: center;
+         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+         border-left: 4px solid #667eea;
+         margin-bottom: 15px;
+      }
+
+      .stat-number {
+         font-size: 2em;
+         font-weight: bold;
+         color: #667eea;
+      }
+
+      .stat-label {
+         color: #6c757d;
+         font-size: 0.9em;
+         margin-top: 5px;
+      }
+
+      .pagination-info {
+         background: #f8f9fa;
+         padding: 10px 20px;
+         border-radius: 5px;
+         margin: 15px 0;
+         text-align: center;
+         color: #6c757d;
+      }
+
+      @media (max-width: 768px) {
+         .main-container {
+            margin: 10px;
+            padding: 15px;
+         }
+
+         .table-responsive {
+            font-size: 0.8em;
+         }
+
+         .search-input {
+            margin-bottom: 10px;
+         }
+      }
+   </style>
    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
       crossorigin="anonymous"></script>
@@ -23,104 +204,170 @@
       angular
          .module("app", ["ui.bootstrap"])
          .controller("uhv", function ($scope, $http) {
+            $scope.currentPage = 1
+            $scope.itemsPerPage = 10
+            $scope.searchTerm = {}
+
             $http.get("trlist.json").then(
                function successCallback(response) {
-                  $scope.codes = response.data;
-                  console.log("trlist : ");
-                  console.log(response.data);
+                  $scope.codes = response.data
+                  $scope.filteredCodes = response.data.trlist
+                  $scope.updateStats()
+                  console.log("trlist loaded successfully")
+                  console.log(response.data)
                },
                function errorCallback(response) {
-                  console.log("Unable to perform get request");
+                  console.log("Unable to perform get request")
                }
-            );
+            )
+
+            $scope.updateStats = function () {
+               if ($scope.codes && $scope.codes.trlist) {
+                  $scope.totalTransformers = $scope.codes.trlist.length
+                  $scope.normalCount = $scope.codes.trlist.filter(t => t.PM_Result === 'Normal').length
+                  $scope.totalPower = $scope.codes.trlist.reduce((sum, t) => sum + (t.kW || 0), 0)
+               }
+            }
+
+            $scope.getStatusClass = function (status) {
+               if (status === 'Normal') return 'status-normal'
+               if (status === 'Warning') return 'status-warning'
+               return 'status-danger'
+            }
+
+            $scope.formatNumber = function (num) {
+               return num ? num.toLocaleString() : '0'
+            }
          })
          .filter("myfilter", function () {
             return function (x) {
                var i,
                   c,
-                  txt = "";
+                  txt = ""
                for (i = 0; i < x.length; i++) {
-                  c = x[i];
+                  c = x[i]
 
-                  c = c.toUpperCase();
+                  c = c.toUpperCase()
 
-                  txt += c;
+                  txt += c
                }
-               return txt;
-            };
+               return txt
+            }
          });
-         
+
    </script>
 </head>
 
-<body class="container">
-   <p id="demo"></p>
-   <script>
-      const d = new Date();
-      document.getElementById("demo").innerHTML = d;
-   </script>
-   <div ng-app="app" ng-controller="uhv">
-      <h3 class="text-center text-white" style="background-color: rgb(215, 9, 242)">
-         ข้อมูลหม้อแปลงไฟฟ้า ของ RDCC Plant
-      </h3>
-      <div class="row">
-         <div class="col-lg-12">
-            <table class="table table-hover">
-               <thead>
-                  <tr style="background-color: rgb(16, 233, 182)">
-                     <th scope="col"></th>
-                     <th scope="col">Substation</th>
-                     <th scope="col">Switchgear_Feeder</th>
-                     <th scope="col">Transformer_No</th>
-                     <th scope="col">TR_Rating(kVA)</th>
-                     <th scope="col">Voltage(kV)</th>
-                     <th scope="col">Power(kW)</th>
-                     <th scope="col">Reactive(kVAR)</th>
-                     <th scope="col" class="text-danger text-center">PM_Result</th>
-                  </tr>
-               </thead>
-               <tbody class="text-center">
-                  <tr style="background-color: rgb(212, 220, 220)">
-                     <th scope="col"></th>
-                     <th scope="col">
-                        <input ng-model="s.Substation" placeholder="ค้นหา Sub" class="form-control input-md" />
-                     </th>
-                     <th scope="col">
-                        <input ng-model="s.Switchgear_Feeder" placeholder="SWGR No." class="form-control input-md" />
-                     </th>
-                     <th scope="col">
-                        <input ng-model="s.Transformer_No" placeholder="TR_No" class="form-control input-md" />
-                     </th>
-                     <th scope="col">
-                        <input ng-model="s.TR_Rating" placeholder="TR_Rating" class="form-control input-md" />
-                     </th>
-                     <th scope="col">
-                        <input ng-model="s.Voltage" placeholder="Voltage" class="form-control input-md" />
-                     </th>
-                     <th scope="col">
-                        <input ng-model="s.Power_kW" placeholder="Power_kW" class="form-control input-md" />
-                     </th>
-                     <th scope="col">
-                        <input ng-model="s.kVAR" placeholder="kVAR" class="form-control input-md" />
-                     </th>
-                     
-                     <th scope="col">
-                        <input ng-model="s.PM_Result" placeholder="รายงาน" class="form-control input-md" />
-                     </th>
-                  </tr>
-                  <tr class="font-weight-bolder" ng-repeat=" r in  codes.trlist | filter:s | limitTo: 20">
-                     <td>{{ $index+1}}</td>
-                     <td>{{ r.Substation}}</td>
-                     <td>{{ r.Switchgear_Feeder}}</td>
-                     <td>{{ r.Transformer_No}}</td>
-                     <td>{{ r.TR_Rating}}</td>
-                     <td>{{ r.Voltage}}</td>
-                     <td>{{ r.kW}}</td>
-                     <td>{{ r.kVAR}}</td>
-                     <td>{{ r.PM_Result}}</td>
-                  </tr>
-               </tbody>
-            </table>
+<body>
+   <div class="main-container">
+      <div class="current-time">
+         <i class="fas fa-clock"></i> <span id="demo"></span>
+      </div>
+
+      <script>
+         const d = new Date()
+         document.getElementById("demo").innerHTML = d.toLocaleString('th-TH', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+         });
+      </script>
+
+      <div ng-app="app" ng-controller="uhv">
+         <div class="header-title">
+            <h2><i class="fas fa-bolt"></i> ระบบจัดการหม้อแปลงไฟฟ้า RDCC Plant</h2>
+            <p class="mb-0">Transformer Management System</p>
+         </div>
+
+         <!-- Statistics Cards -->
+         <div class="row stats-row">
+            <div class="col-md-4">
+               <div class="stat-card">
+                  <div class="stat-number">{{ totalTransformers || 0 }}</div>
+                  <div class="stat-label"><i class="fas fa-plug"></i> Total Transformers</div>
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="stat-card">
+                  <div class="stat-number">{{ normalCount || 0 }}</div>
+                  <div class="stat-label"><i class="fas fa-check-circle"></i> Normal Status</div>
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="stat-card">
+                  <div class="stat-number">{{ formatNumber(totalPower) }}</div>
+                  <div class="stat-label"><i class="fas fa-lightning-bolt"></i> Total Power (kW)</div>
+               </div>
+            </div>
+         </div>
+
+         <!-- Search Filters -->
+         <div class="search-container">
+            <h5><i class="fas fa-search"></i> ค้นหาและกรองข้อมูล</h5>
+            <div class="row search-row">
+               <div class="col-md-3">
+                  <input ng-model="s.Substation" placeholder="🏭 ค้นหา Substation" class="form-control search-input" />
+               </div>
+               <div class="col-md-3">
+                  <input ng-model="s.Switchgear_Feeder" placeholder="⚡ SWGR Feeder" class="form-control search-input" />
+               </div>
+               <div class="col-md-3">
+                  <input ng-model="s.Transformer_No" placeholder="🔢 Transformer No."
+                     class="form-control search-input" />
+               </div>
+               <div class="col-md-3">
+                  <input ng-model="s.PM_Result" placeholder="📊 PM Result" class="form-control search-input" />
+               </div>
+            </div>
+         </div>
+
+         <div class="table-container">
+            <div class="table-responsive">
+               <table class="table table-hover">
+                  <thead>
+                     <tr>
+                        <th scope="col"><i class="fas fa-hashtag"></i></th>
+                        <th scope="col"><i class="fas fa-building"></i> Substation</th>
+                        <th scope="col"><i class="fas fa-plug"></i> Switchgear Feeder</th>
+                        <th scope="col"><i class="fas fa-cogs"></i> Transformer No</th>
+                        <th scope="col"><i class="fas fa-tachometer-alt"></i> Rating (kVA)</th>
+                        <th scope="col"><i class="fas fa-bolt"></i> Voltage (kV)</th>
+                        <th scope="col"><i class="fas fa-lightning-bolt"></i> Power (kW)</th>
+                        <th scope="col"><i class="fas fa-wave-square"></i> Reactive (kVAR)</th>
+                        <th scope="col"><i class="fas fa-clipboard-check"></i> PM Result</th>
+                     </tr>
+                  </thead>
+                  <tbody class="text-center">
+                     <tr ng-repeat="r in codes.trlist | filter:s | limitTo: 20"
+                        ng-class="{'table-warning': r.PM_Result !== 'Normal'}">
+                        <td><span class="badge badge-primary">{{ $index + 1 }}</span></td>
+                        <td><strong>{{ r.Substation }}</strong></td>
+                        <td>{{ r.Switchgear_Feeder }}</td>
+                        <td><span class="badge badge-info">{{ r.Transformer_No }}</span></td>
+                        <td>{{ formatNumber(r.TR_Rating) }}</td>
+                        <td><span class="badge badge-secondary">{{ r.Voltage }}</span></td>
+                        <td class="text-success"><strong>{{ formatNumber(r.kW) }}</strong></td>
+                        <td class="text-primary"><strong>{{ formatNumber(r.kVAR) }}</strong></td>
+                        <td>
+                           <span class="status-badge" ng-class="getStatusClass(r.PM_Result)">
+                              <i class="fas fa-circle" ng-show="r.PM_Result === 'Normal'"></i>
+                              <i class="fas fa-exclamation-triangle" ng-show="r.PM_Result !== 'Normal'"></i>
+                              {{ r.PM_Result }}
+                           </span>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+
+         <div class="pagination-info">
+            <i class="fas fa-info-circle"></i>
+            แสดง {{ (codes.trlist | filter:s).length > 20 ? '20' : (codes.trlist | filter:s).length }} จาก {{
+            (codes.trlist | filter:s).length }} รายการ
          </div>
       </div>
    </div>
